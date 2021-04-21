@@ -1,0 +1,24 @@
+{
+  "name": "live-chat",
+  "version": "1.0.0",
+  "description": "Live chat in JavaScript, using Node.js | Express | Mongoose | Socket.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecandotti/live-chat.git"
+  },
+  "author": "Enzo Candotti <enzo.candotti16@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ecandotti/live-chat/issues"
+  },
+  "homepage": "https://github.com/ecandotti/live-chat#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.5",
+    "socket.io": "^4.0.1"
+  }
+}
