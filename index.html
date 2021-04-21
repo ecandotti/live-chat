@@ -83,8 +83,8 @@
         socket.on('historychat', data => {
             console.log(data)
             if (data.length) {
-                data.forEach(message => {
-                    appendMessages(message.msg)
+                data.forEach(el => {
+                    appendMessages(el.pseudo, el.msg)
                 });
             }
         })
@@ -100,7 +100,7 @@
 
         // Funciton that add html message block in DOM
         function appendMessages(pseudo, message) {
-            const html = `<div>${pseudo} : ${message}</div>`
+            const html = `<div><u>${pseudo}:</u> ${message}</div>`
             messages.innerHTML += html
         }
     </script>
