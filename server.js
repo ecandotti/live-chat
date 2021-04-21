@@ -47,5 +47,5 @@ io.on('connection', (socket) =>{
 })
 
 server.listen(3000, function () {
-    console.log('Votre app est disponible sur localhost:3000 !')
+    console.log('Live-Chat disponible sur localhost:3000 !')
 })
