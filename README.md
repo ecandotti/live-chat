@@ -9,7 +9,7 @@
 Dependecies used | Utility
 ------------ | -------------
 Express | Build web application
-Mongoose | Wrinting MongoDB Validation
+Mongoose | Writing MongoDB Validation
 Socket.io | Websocket real-time  
   
 ## How to clone/use the project :  
