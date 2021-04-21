@@ -1,11 +1,14 @@
 // Init require
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const mongoose = require('mongoose')
 const Msg = require('./models/mesage')
 
+
+app.use(cors())
 // Connect to mongoDB
 mongoose.connect('mongodb://localhost:27017/live-chat', { useNewUrlParser: true, useUnifiedTopology: true })
 
