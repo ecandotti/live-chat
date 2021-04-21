@@ -20,38 +20,31 @@ connection.once('open', function() {
     console.log("Connexion à la base de donnée MongoDB réussie")
 })
 
-app.get('/json', function (req, res) {
-    res.status(200).json({"message":"ok"})
-})
-
 // Create connection link
 io.on('connection', (socket) =>{
    console.log(`Connecté au client ${socket.id}`)
-   io.emit('news','Voici un nouvel élément envoyé par le serveur')
+   // Request chat history in mongoDB and send into chathistory chanel
+    Msg.find().then(chathistory => {
+        socket.emit('chathistory', chathistory)
+    })
+
+    // Chanel livechat
+    socket.on('livechat', res => {
+        // Store res in message variable
+        const message = new Msg({ pseudo: res.pseudo, msg: res.msg })
+        // Save in mongoDB and emit the message in the chanel (livechat)
+        console.log(message)
+        message.save().then(() => {
+            io.emit('message', { pseudo: res.pseudo, msg: res.msg })
+        })
+    })
+
+    // When user is deconnected, info will be write in log
+    socket.on('disconnect', () => {
+        console.log('User disconnected')
+    })
 })
 
 server.listen(3000, function () {
     console.log('Votre app est disponible sur localhost:3000 !')
 })
-
-// // New connection event
-// io.on('connection', (socket) => {
-//     // Request chat history in mongoDB and send into chathistory chanel
-//     Msg.find().then(chathistory => {
-//         socket.emit('chathistory', chathistory)
-//     })
-//     // Chanel livechat
-//     socket.on('livechat', msg => {
-//         // Store msg in message variable
-//         const message = new Msg({ msg: msg, pseudo: "Anonymous"})
-//         // Save in mongoDB and emit the message in the chanel (livechat)
-//         message.save().then(() => {
-//             io.emit('message', msg)
-//         })
-//     })
-
-//     // When user is deconnected, info will be write in log
-//     socket.on('disconnect', () => {
-//         console.log('User disconnected')
-//     })
-// })
