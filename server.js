@@ -1,16 +1,16 @@
 // Init require
+const { join } = require('path')
 const express = require('express')
 const app = express()
-
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
 app.get('/', function (req, res) {
-   res.sendFile('index.html', { root: __dirname })
+   res.sendFile(join(__dirname, 'index.html'))
 })
 
 const mongoose = require('mongoose')
-const Msg = require('./models/mesage')
+const Msg = require(join(__dirname, 'models', 'message.js'))
 
 // Connect to mongoDB and if connection is ready
 mongoose.connect('mongodb://localhost:27017/live-chat', { useNewUrlParser: true, useUnifiedTopology: true })
