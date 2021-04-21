@@ -23,17 +23,17 @@ connection.once('open', function() {
 // Create connection link
 io.on('connection', (socket) =>{
    console.log(`Connecté au client ${socket.id}`)
-   // Request chat history in mongoDB and send into historychat chanel
+   // Request chat history in mongoDB and send into historychat channel
     Msg.find().then(historychat => {
         console.log(historychat)
         socket.emit('historychat', historychat)
     })
 
-    // Chanel livechat
+    // channel livechat
     socket.on('livechat', res => {
         // Store res in message variable
         const message = new Msg({ pseudo: res.pseudo, msg: res.msg })
-        // Save in mongoDB and emit the message in the chanel (livechat)
+        // Save in mongoDB and emit the message in the channel (livechat)
         console.log(message)
         message.save().then(() => {
             io.emit('message', { pseudo: res.pseudo, msg: res.msg })
