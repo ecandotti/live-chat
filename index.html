@@ -60,8 +60,8 @@
 <body>
     <h1>Client</h1>
     <form id="msgForm" method="GET" action="">
-        Pseudo : <input type="text" name="msg" style="width: 100%;">
-        Message : <input type="text" name="pseudo" style="width: 100%;">
+        Pseudo : <input type="text" name="pseudo" style="width: 100%;">
+        Message : <input type="text" name="msg" style="width: 100%;">
         <button style="margin-top: 5px; width: 100%; cursor: pointer;" type="submit">Envoyer</button>
     </form>
     <div id="messages">
@@ -75,8 +75,8 @@
         
         // Listen message websocket
         socket.on('message', data => {
-            console.log(data)
-            appendMessages(data)
+            console.log(`${data.pseudo} : ${data.msg}`)
+            appendMessages(data.pseudo, data.msg)
         })
 
         // Listen historychat socket
@@ -92,17 +92,15 @@
         // Wait submit event, and send value to livechat socket
         msgForm.addEventListener('submit', e => {
             e.preventDefault()
-            console.log(e.target.value.pseudo)
-            socket.emit('livechat', msgForm.msg.value)
-            console.log('Submit from msgfrom', msgForm.msg.value)
+            socket.emit('livechat', { pseudo: msgForm.pseudo.value, msg: msgForm.msg.value})
+            console.log('Value emited : ', msgForm.pseudo.value,' : ',msgForm.msg.value)
             msgForm.msg.value = ''
-
 
         })
 
         // Funciton that add html message block in DOM
-        function appendMessages(message) {
-            const html = `<div>${message}</div>`
+        function appendMessages(pseudo, message) {
+            const html = `<div>${pseudo} : ${message}</div>`
             messages.innerHTML += html
         }
     </script>
