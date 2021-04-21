@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/ecandotti/live-chat#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.12.5",
     "socket.io": "^4.0.1"
