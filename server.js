@@ -23,9 +23,10 @@ connection.once('open', function() {
 // Create connection link
 io.on('connection', (socket) =>{
    console.log(`Connecté au client ${socket.id}`)
-   // Request chat history in mongoDB and send into chathistory chanel
-    Msg.find().then(chathistory => {
-        socket.emit('chathistory', chathistory)
+   // Request chat history in mongoDB and send into historychat chanel
+    Msg.find().then(historychat => {
+        console.log(historychat)
+        socket.emit('historychat', historychat)
     })
 
     // Chanel livechat
